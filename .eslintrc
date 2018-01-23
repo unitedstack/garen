@@ -1,0 +1,50 @@
+{
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 8,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "globals": {
+    "__": false,
+    "ActiveXObject": false,
+    "HALO": false
+  },
+  "plugins": [
+    "react",
+    "babel"
+  ],
+  "rules": {
+    "indent": [2, 2, {"SwitchCase": 1, "ignoredNodes": ["ConditionalExpression"]}],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "no-console": 0,
+    "no-useless-escape": 0,
+    "no-case-declarations": 0,
+    "no-unused-vars": [2, { "vars": "all", "args": "none" }],
+    "react/no-string-refs": 0,
+    "react/prop-types": 0,
+    "react/display-name": 0,
+    "react/no-direct-mutation-state": 0,
+    "react/no-render-return-value": 0
+  }
+}

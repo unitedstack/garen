@@ -1,0 +1,113 @@
+{
+  "modules": [{
+    "title": "operation_service",
+    "items": [
+      "registration-approval",
+      "approved-registration-application",
+      "quota-approval"
+    ]
+  }, {
+    "title": "compute_service",
+    "items": [
+      "host",
+      "host-overview",
+      "instance",
+      "host-aggregates",
+      "availability-zones",
+      "instance-restore",
+      "flavor",
+      "image",
+      "private-image",
+      "snapshot-type"
+    ]
+  }, {
+    "title": "storage_service",
+    "items": [
+      "volume",
+      "volume-type",
+      "qos-spec",
+      "snapshot"
+    ]
+  }, {
+    "title": "network_service",
+    "items": [
+      "network",
+      "subnet",
+      "router",
+      "floating-ip",
+      "port"
+    ]
+  }, {
+    "title": "keystone",
+    "items": [
+      "domain",
+      "project",
+      "user",
+      "service-user",
+      "user-group",
+      "role"
+    ]
+  }, {
+    "title": "system-information",
+    "items": [
+      "system-information",
+      "compute-services",
+      "block-storage-services",
+      "network-agents",
+      "orchestration-services",
+      "metadata-definition"
+    ]
+  }, {
+    "title": "setting-mgmt",
+    "items": [
+      "feature-mgmt",
+      "module-mgmt"
+    ]
+  }],
+  "default_module": "host",
+  "languages": [
+    "en",
+    "zh-CN"
+  ],
+  "routers": [{
+    "key": "host-overview",
+    "link": "host"
+  }, {
+    "key": "instance-restore",
+    "link": "instance"
+  }, {
+    "key": "availability-zones",
+    "link": "host-aggregates"
+  }, {
+    "key": "private-image",
+    "link": "image"
+  }, {
+    "key": "subnet",
+    "link": "network"
+  }, {
+    "key": "volume-type",
+    "link": "volume"
+  }, {
+    "key": "qos-spec",
+    "link": "volume"
+  }, {
+    "key": "service-user",
+    "link": "user"
+  }, {
+    "key": "compute-services",
+    "link": "system-information"
+  }, {
+    "key": "block-storage-services",
+    "link": "system-information"
+  }, {
+    "key": "network-agents",
+    "link": "system-information"
+  }, {
+    "key": "orchestration-services",
+    "link": "system-information"
+  }, {
+    "key": "approved-registration-application",
+    "link": "registration-approval"
+  }],
+  "theme": "default"
+}

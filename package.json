@@ -1,0 +1,71 @@
+{
+  "name": "garen",
+  "version": "1.0.0",
+  "description": "UDS platform.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node ./scripts/client_i18n_build.js && cd client && grunt dev",
+    "build": "./scripts/build.sh",
+    "transpile": "node ./scripts/client_i18n_build.js && node ./scripts/server_i18n_build.js",
+    "add_eslint": "cd scripts && node checkPreCommit.js",
+    "eslint": "eslint *.js server/**/ configs/ scripts/ client/**/ tests/__tests__/ --ext .js,.jsx --cache && cd client && grunt jsonlint",
+    "merge_assets": "cd client && grunt copy:assets",
+    "prepare": "cd scripts && node checkPreCommit.js",
+    "preinstall": "cd client/uskin && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unitedstack/garen.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/unitedstack/garen/issues"
+  },
+  "homepage": "https://github.com/unitedstack/garen#readme",
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-runtime": "^6.3.19",
+    "clipboard-plus": "^1.0.0",
+    "echarts": "^3.3.2",
+    "ejs": "^2.5.7",
+    "eventemitter2": "^1.0.0",
+    "glob": "^6.0.1",
+    "react": "^15.4.0",
+    "react-dom": "^15.4.0",
+    "rsvp": "^3.1.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.5",
+    "babel-core": "^6.1.12",
+    "babel-eslint": "^8.0.1",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "cssnano": "^3.4.0",
+    "eslint": "^4.8.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
+    "extract-text-webpack-plugin": "^3.0.1",
+    "grunt": "^1.0.1",
+    "grunt-banner": "^0.6.0",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-cssnano-plus": "^1.0.0",
+    "grunt-jsonlint": "^1.1.0",
+    "grunt-webpack": "^2.0.1",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
+    "load-grunt-tasks": "^3.3.0",
+    "postcss-loader": "^1.3.2",
+    "time-grunt": "^1.2.2",
+    "uglifyjs-webpack-plugin": "^1.1.6",
+    "webpack": "^3.9.1"
+  }
+}

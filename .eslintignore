@@ -1,0 +1,4 @@
+client/uskin/*
+client/dist/*
+client/libs/moment.js
+**/node_modules/**

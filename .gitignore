@@ -62,5 +62,9 @@ typings/
 
 # Dist
 client/dist
+client/assets/**/
+
+# i18n
+locale/*
 
 package-lock.json

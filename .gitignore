@@ -68,3 +68,5 @@ client/assets/**/
 locale/*
 
 package-lock.json
+
+client/manifest.json

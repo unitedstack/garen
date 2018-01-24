@@ -1,3 +1,6 @@
+/**
+ * @PengJiyuan
+ */
 const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
@@ -5,7 +8,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const os = require('os');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const menifestConfig = require('./manifest.json');
 
 let language = process.env.npm_config_lang || process.env.language;
 
@@ -13,6 +15,14 @@ let language = process.env.npm_config_lang || process.env.language;
 if (!language) {
   language = 'zh-CN';
 }
+
+getManifest = () => {
+  try {
+    return require('./manifest.json');
+  } catch(e) {
+    return {};
+  }
+};
 
 let entry = {};
 fs.readdirSync('./applications')
@@ -116,7 +126,7 @@ module.exports = (env) => {
       }),
       new webpack.DllReferencePlugin({
         context: path.join(__dirname),
-        manifest: menifestConfig
+        manifest: getManifest()
       })
     ],
 
@@ -147,7 +157,7 @@ module.exports = (env) => {
       }),
       new webpack.DllReferencePlugin({
         context: path.join(__dirname),
-        manifest: menifestConfig
+        manifest: getManifest()
       })
     ]
   }

@@ -4,12 +4,13 @@
   "description": "UDS platform.",
   "main": "index.js",
   "scripts": {
+    "dll": "cd client && rm -rf dist/dll && webpack --config dll.config.js --env.production",
     "dev": "node ./scripts/client_i18n_build.js && cd client && grunt dev",
-    "build": "./scripts/build.sh",
+    "build": "./scripts/client_build.sh",
     "transpile": "node ./scripts/client_i18n_build.js && node ./scripts/server_i18n_build.js",
     "add_eslint": "cd scripts && node checkPreCommit.js",
     "eslint": "eslint *.js server/**/ configs/ scripts/ client/**/ tests/__tests__/ --ext .js,.jsx --cache && cd client && grunt jsonlint",
-    "merge_assets": "cd client && grunt copy:assets",
+    "merge_assets": "cd client && grunt merge_assets",
     "prepare": "cd scripts && node checkPreCommit.js",
     "preinstall": "cd client/uskin && npm install"
   },

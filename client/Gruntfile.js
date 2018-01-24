@@ -1,3 +1,6 @@
+/**
+ * @PengJiyuan
+ */
 const path = require('path');
 const webpackConfig = require('./webpack.config.js');
 const dllConfig = require('./dll.config.js');
@@ -18,7 +21,9 @@ module.exports = function(grunt) {
 
     // Task configuration.
     clean: {
-      dist: ['client/dist/*']
+      dist: ['client/dist/*'],
+      exceptDll: ['client/dist/uskin', 'client/dist/*.*'],
+      assets: ['client/assets/*/']
     },
 
     cssnano: {
@@ -95,12 +100,12 @@ module.exports = function(grunt) {
   grunt.registerTask('dev', ['clean:dist', 'copy:uskin', 'webpack:devDll', 'webpack:dev']);
 
   grunt.registerTask('build', ['clean:dist', 'copy:uskin', 'webpack:buildDll', 'webpack:build']);
-
-  grunt.registerTask('before', ['clean:dist', 'webpack:buildDll']);
   // Build JS
   grunt.registerTask('js', ['webpack:build']);
 
   // Cope with the rest stuffs
-  grunt.registerTask('rest', ['cssnano', 'usebanner', 'copy']);
+  grunt.registerTask('rest', ['cssnano', 'usebanner', 'copy:uskin', 'merge_assets']);
+
+  grunt.registerTask('merge_assets', ['clean:assets', 'copy:assets']);
 
 };

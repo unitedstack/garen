@@ -20,7 +20,7 @@ module.exports = function(grunt) {
     // Task configuration.
     clean: {
       dist: ['client/dist/*'],
-      exceptDll: ['client/dist/uskin', 'client/dist/*.*'],
+      exceptDll: ['client/dist/*.*'],
       assets: ['client/assets/*/']
     },
 
@@ -58,12 +58,6 @@ module.exports = function(grunt) {
     },
 
     copy: {
-      uskin: {
-        expand: true,
-        cwd: 'client/uskin/dist/css',
-        src: '**',
-        dest: 'client/dist/uskin'
-      },
       assets: {
         expand: true,
         cwd: 'client/applications',
@@ -95,16 +89,16 @@ module.exports = function(grunt) {
 
   require('time-grunt')(grunt);
 
-  grunt.registerTask('dev', ['clean:dist', 'copy:uskin', 'webpack:devDll', 'webpack:dev']);
+  grunt.registerTask('dev', ['clean:dist', 'webpack:devDll', 'webpack:dev']);
 
-  grunt.registerTask('devServer', ['clean:dist', 'copy:uskin', 'webpack:dev']);
+  grunt.registerTask('devServer', ['clean:dist', 'webpack:dev']);
 
-  grunt.registerTask('build', ['clean:dist', 'copy:uskin', 'webpack:buildDll', 'webpack:build']);
+  grunt.registerTask('build', ['clean:dist', 'webpack:buildDll', 'webpack:build']);
   // Build JS
   grunt.registerTask('js', ['webpack:build']);
 
   // Cope with the rest stuffs
-  grunt.registerTask('rest', ['cssnano', 'usebanner', 'copy:uskin', 'merge_assets']);
+  grunt.registerTask('rest', ['cssnano', 'usebanner', 'merge_assets']);
 
   grunt.registerTask('merge_assets', ['clean:assets', 'copy:assets']);
 

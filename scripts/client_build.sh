@@ -2,11 +2,9 @@
 
 cd $(dirname $0)
 
-cd ../client/uskin && npm run release
-
-cd ..
-
 npm run dll
+
+cd ../client
 
 grunt clean:exceptDll
 

@@ -34,7 +34,7 @@ class SideMenu extends React.Component {
                   return !module.title ? module.items.map(item => <Menu.Item key={item}>
                     <Link to={`/${item}`}><Icon type="pie-chart" />{item}</Link>
                   </Menu.Item>) :
-                    <SubMenu key="sub1" title={<span><Icon type="mail" /><span>{module.title}</span></span>}>
+                    <SubMenu key={module.title} title={<span><Icon type="mail" /><span>{module.title}</span></span>}>
                       {
                         module.items.map(item => <Menu.Item key={item}>
                           <Link to={`/${item}`}><Icon type="pie-chart" />{item}</Link>

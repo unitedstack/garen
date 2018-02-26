@@ -6,3 +6,5 @@
 npm install
 npm run start:dev
 ```
+
+### 然后打开`https://localhost:8888` 即可

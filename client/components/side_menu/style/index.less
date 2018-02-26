@@ -1,51 +1,10 @@
-@import "../../../style/index.less";
-
-@sub_menu_item_selected_bg_color: @color_info;
-@sub_menu_bg_color: @color_grey_900;
-
 .halo-com-menu {
   display: flex;
   position: relative;
-  flex: 1;
-  .fixed-width(200px);
-
-  > .sub-menu {
-    position: relative;
-    width: 200px;
-    min-width: 200px;
-    max-width: 200px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background-color: @sub_menu_bg_color;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    > ul.menu {
-      background-color: @sub_menu_bg_color;
-      border: 0;
-      li > div > h6 {
-        padding: 16px 30px 8px;
-      }
-      li > div > ul > li {
-        padding-left: 30px;
-        color: #fff;
-        height: 40px;
-        line-height: 40px;
-        font-weight: 200;
-        border: none;
-        &:hover {
-          background-color: @color_grey_800;
-        }
-        &.menu-item-selected {
-          background-color: @sub_menu_item_selected_bg_color;
-        }
-      }
-    }
+  height: 100%;
+  background-color: #001529;
+  overflow: auto;
+  a {
+    color: rgba(255, 255, 255, 0.65);
   }
-}
-
-#main {
-  margin-left: -20px;
 }

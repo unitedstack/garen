@@ -1,6 +1,6 @@
-require('./style/index.less');
+import './style/index.less';
 
-const React = require('react');
+import React from 'react';
 
 class Model extends React.Component {
 
@@ -18,8 +18,8 @@ class Model extends React.Component {
 
   render() {
     return (
-      <div className="halo-module-demo" style={this.props.style}>
-        <div ref="c" id="c"></div>
+      <div className="garen-module-about">
+        <h1>About</h1>
       </div>
     );
   }

@@ -1,31 +1,50 @@
-require('./style/index.less');
+import './style/index.less';
 
-const React = require('react');
-const Menu = require('client/uskin/index').Menu;
+import React from 'react';
+import { Menu, Icon } from 'antd';
+const SubMenu = Menu.SubMenu;
+import { Link } from 'react-router-dom';
 
 class SideMenu extends React.Component {
   constructor(props) {
     super(props);
+    
+    this.state = {
+    };
   }
 
   render() {
-    let props = this.props,
-      style;
+    const props = this.props;
+    const location = props.location;
 
-    if(!props.items) {
-      style = {
-        width: '96px',
-        minWidth: '96px',
-        maxWidth: '96px'
-      };
-    }
     return (
-      <div ref="halo_com_menu" className="halo-com-menu" style={style}>
+      <div>
         {
-          props.items ?
-            <div className="sub-menu">
-              <Menu items={props.items} />
-            </div> : null
+          props.configs ?
+          <div>
+            <Menu
+              defaultSelectedKeys={[location.pathname.split('/')[1] || 'home']}
+              defaultOpenKeys={['sub1']}
+              mode="inline"
+              theme="dark"
+              style={{width: 180}}
+            >
+              {
+                props.configs.modules.map(module => {
+                  return !module.title ? module.items.map(item => <Menu.Item key={item}>
+                    <Link to={`/${item}`}><Icon type="pie-chart" />{item}</Link>
+                  </Menu.Item>) :
+                    <SubMenu key="sub1" title={<span><Icon type="mail" /><span>{module.title}</span></span>}>
+                      {
+                        module.items.map(item => <Menu.Item key={item}>
+                          <Link to={`/${item}`}><Icon type="pie-chart" />{item}</Link>
+                        </Menu.Item>)
+                      }
+                    </SubMenu>;
+                })
+              }
+            </Menu>
+          </div> : null
         }
       </div>
     );

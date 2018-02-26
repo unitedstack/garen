@@ -1,16 +1,14 @@
-require('./style/index.less');
+import './style/index.less';
 
-const ReactDOM = require('react-dom');
-const React = require('react');
-const Model = require('./model');
-const __ = require('locale/client/dashboard.lang.json');
-
-const dashboardModel = React.createFactory(Model);
+import ReactDOM from 'react-dom';
+import React from 'react';
+import Model from './model';
+import { BrowserRouter } from 'react-router-dom';
+import __  from 'locale/client/dashboard.lang.json';
 
 ReactDOM.render(
-  dashboardModel({
-    __: __,
-    HALO: HALO
-  }),
+  <BrowserRouter>
+    <Model __={__} />
+  </BrowserRouter>,
   document.getElementById('container')
 );

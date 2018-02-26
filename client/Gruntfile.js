@@ -4,8 +4,6 @@
 const path = require('path');
 const webpackConfig = require('./webpack.config.js');
 const dllConfig = require('./dll.config.js');
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = function(grunt) {
 
@@ -46,7 +44,7 @@ module.exports = function(grunt) {
       buildDll: dllConfig(),
       devDll: dllConfig({development: true}),
       build: webpackConfig(),
-      dev: webpackConfig({development: true})
+      dev: webpackConfig()
     },
 
     usebanner: {
@@ -98,6 +96,8 @@ module.exports = function(grunt) {
   require('time-grunt')(grunt);
 
   grunt.registerTask('dev', ['clean:dist', 'copy:uskin', 'webpack:devDll', 'webpack:dev']);
+
+  grunt.registerTask('devServer', ['clean:dist', 'copy:uskin', 'webpack:dev']);
 
   grunt.registerTask('build', ['clean:dist', 'copy:uskin', 'webpack:buildDll', 'webpack:build']);
   // Build JS

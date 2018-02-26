@@ -12,7 +12,6 @@
     "eslint": "eslint *.js server/**/ configs/ scripts/ client/**/ tests/__tests__/ --ext .js,.jsx --cache && cd client && grunt jsonlint",
     "merge_assets": "cd client && grunt merge_assets",
     "prepare": "cd scripts && node checkPreCommit.js",
-    "preinstall": "cd client/uskin && npm install",
     "start:dev": "node ./scripts/client_i18n_build.js && cd client && grunt devServer && webpack-dev-server --color --inline"
   },
   "repository": {

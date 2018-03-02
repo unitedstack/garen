@@ -33,6 +33,7 @@
     "ejs": "^2.5.7",
     "eventemitter2": "^1.0.0",
     "glob": "^6.0.1",
+    "less-vars-to-js": "^1.2.1",
     "react": "^16.3.0-alpha.1",
     "react-dom": "^16.3.0-alpha.1",
     "react-router-dom": "^4.2.2",

@@ -67,7 +67,7 @@ class InputModal extends React.Component {
           <Input style={styleWidth}
             ref={ input => this[props.type] = input}
             placeholder={props.__[props.placeholder]}
-            onChange={this.onChange.bind(this, props.type)}/>;
+            onChange={this.onChange.bind(this, props.type)}/>
         </Tooltip>;
       case 'textarea':
         return <TextArea style={styleWidth}

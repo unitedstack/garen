@@ -15,7 +15,6 @@ class Model extends React.Component {
   }
 
   componentWillMount() {
-
   }
 
   componentDidMount() {

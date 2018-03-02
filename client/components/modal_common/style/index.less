@@ -18,6 +18,9 @@
   padding-left: 36px;
   padding-right: 36px;
   margin-bottom: 20px;
+  &.hide {
+    display: none;
+  }
   &.label-row {
     padding-left: 0;
 
@@ -53,6 +56,17 @@
 
     >div:first-child {
       padding-top: 5px;
+    }
+  }
+  &.slider-row {
+    .slidearea {
+      .ant-slider {
+        float: left;
+      }
+      .range {
+        width: 350px;
+        text-align: right;
+      }
     }
   }
   &.select-row {

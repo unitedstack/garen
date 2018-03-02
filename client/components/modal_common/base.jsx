@@ -1,6 +1,7 @@
-const React = require('react');
+import React from 'react';
 
-import { Modal, Button, Alert } from 'antd';
+import { Modal, Button, LocaleProvider } from 'antd';
+import zh_CN from 'antd/lib/locale-provider/zh_CN';
 
 import Steps from './subs/steps/index';
 import Cascader from './subs/cascader/index';
@@ -9,6 +10,14 @@ import Input from './subs/input/index';
 import InputNumber from './subs/inputNumber/index';
 import Radio from './subs/radio/index';
 import Select from './subs/select/index';
+import Slider from './subs/slider/index';
+import Switch from './subs/switch/index';
+import TimePicker from './subs/TimePicker/index';
+import Transfer from './subs/Transfer/index';
+import Tooltip from './subs/Tooltip/index';
+import Alert from './subs/alert/index';
+import Upload from './subs/upload/index';
+import Tabs from './subs/tabs/index';
 
 let refs = {};
 
@@ -26,7 +35,7 @@ class ModalBase extends React.Component {
       errorHide: true
     };
 
-    ['onConfirm', 'onCancel', 'onAction'].forEach(m => {
+    ['onConfirm', 'onCancel', 'onAction', 'initialize'].forEach(m => {
       this[m] = this[m].bind(this);
     });
     // this.onPop = this.onPop.bind(this);
@@ -43,11 +52,9 @@ class ModalBase extends React.Component {
 
   initialize() {
     let props = this.props;
-
     return props.config.fields.map((m) => {
       m.label = this.__[m.field];
       m.__ = this.__;
-
       this[m.field] = React.createRef();
 
       let subComs = {
@@ -61,11 +68,18 @@ class ModalBase extends React.Component {
         'inputNumber': InputNumber,
         'radio': Radio,
         'select': Select,
-        'optionGroup': Select
+        'optionGroup': Select,
+        'Slider': Slider,
+        'Switch': Switch,
+        'TimePicker': TimePicker,
+        'Transfer': Transfer,
+        'Tooltip': Tooltip,
+        'Alert': Alert,
+        'Upload': Upload,
+        'Tabs': Tabs
       };
 
       let Sub = subComs[m.type];
-
       return Sub ? <Sub key={m.field} ref={ this[m.field] } {...m} onAction={this.onAction}/> : null;
     });
   }
@@ -152,15 +166,16 @@ class ModalBase extends React.Component {
     this.modalRef = React.createRef();
 
     return (
-      <Modal ref={ this.modalRef } title={title} visible={state.visible}
-        onOk={this.onConfirm} onCancel={this.onCancel}
-        footer={[
-          <Button key="confirm" type="primary" loading={state.loading} onClick={this.onConfirm}>{__.confirm}</Button>,
-          <Button key="cancel" onClick={this.onCancel}>{__.cancel}</Button>
-        ]}>
-        { this.initialize() }
-        <Alert showIcon message={state.errorMessage} className={state.errorHide ? 'hide' : ''} type="error" />
-      </Modal>
+      <LocaleProvider locale={zh_CN}>
+        <Modal ref={ this.modalRef } title={title} visible={state.visible} width={600}
+          footer={[
+            <Button key="confirm" type="primary" loading={state.loading} onClick={this.onConfirm}>{__.confirm}</Button>,
+            <Button key="cancel" onClick={this.onCancel}>{__.cancel}</Button>
+          ]}>
+          { this.initialize() }
+          <Alert __={__} message={state.errorMessage} hide={state.errorHide} tip_type="error" />
+        </Modal>
+      </LocaleProvider>
     );
   }
 }

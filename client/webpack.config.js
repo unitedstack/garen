@@ -6,6 +6,7 @@ const fs = require('fs');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const lessToJs = require('less-vars-to-js');
 
 let entry = {};
 fs.readdirSync('./applications')
@@ -18,6 +19,7 @@ fs.readdirSync('./applications')
 
 module.exports = (env) => {
   // production mode
+  let themer = lessToJs(fs.readFileSync(path.join(__dirname, `./theme/index.less`), 'utf8'));
   let webpackConfig = {
 
     context: __dirname,
@@ -54,7 +56,7 @@ module.exports = (env) => {
               }
             }
           }, {
-            loader: 'less-loader'
+            loader: `less-loader?{"sourceMap":true,"modifyVars":${JSON.stringify(themer)}}`
           }]
         })
       }, {

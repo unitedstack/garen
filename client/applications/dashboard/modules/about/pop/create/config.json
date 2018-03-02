@@ -1,14 +1,6 @@
 {
   "title": ["create", "keypair"],
   "fields": [{
-    "type": "steps",
-    "field": "steps",
-    "title": ["0", "1", "2"],
-    "description": ["progressDot"],
-    "size": "small",
-    "icons": ["user"],
-    "progressDot": false
-  }, {
     "type": "cascader",
     "field": "instance",
     "data": [],
@@ -62,6 +54,53 @@
   }, {
     "type": "optionGroup",
     "field": "alarm"
+  }, {
+    "type": "Slider",
+    "field": "apply",
+    "min": 10,
+    "max": 50,
+    "value": 15,
+    "unit": "c",
+    "dots": true
+  }, {
+    "type": "Upload",
+    "field": "architecture",
+    "multiple": true,
+    "headers": {
+      "authorization": "authorization-text"
+    }
+  }, {
+    "type": "Switch",
+    "field": "attribute",
+    "defaultChecked": false,
+    "size": "small",
+    "checkedChildren": "1",
+    "unCheckedChildren": "0"
+  }, {
+    "type": "Tabs",
+    "field": "available"
+  }, {
+    "type": "TimePicker",
+    "field": "basic",
+    "allowEmpty": true,
+    "disabled": false
+  }, {
+    "type": "Transfer",
+    "field": "active",
+    "titles": ["instance","network"],
+    "showSearch": true
+  }, {
+    "type": "Tooltip",
+    "field": "add",
+    "arrowPointAtCenter": false,
+    "placement": "bottomRight",
+    "title": "instance",
+    "text": "network"
+  }, {
+    "type": "Alert",
+    "tip_type": "success",
+    "field": "warning",
+    "message": "network"
   }],
   "btn": {
     "value": "create",

@@ -1,8 +1,8 @@
 require('./style/index.less');
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const Base = require('./base');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Base from './base';
 
 function modal(props) {
 

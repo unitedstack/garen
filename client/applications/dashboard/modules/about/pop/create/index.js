@@ -108,6 +108,50 @@ function pop(parent, callback) {
         data: optionGroups,
         value: optionGroups[0].children[0].id
       });
+
+      const mockData = [];
+      for (let i = 0; i < 20; i++) {
+        mockData.push({
+          key: i.toString(),
+          title: `content${i + 1}`,
+          description: `description of content${i + 1}`,
+          disabled: i % 3 < 1
+        });
+      }
+
+      const targetKeys = mockData
+        .filter(item => +item.key % 3 > 1)
+        .map(item => item.key);
+
+      const defaultTime = moment('00:05:00', 'HH:mm:ss');
+
+      const panes = [
+        { title: '1', content: 'Content of Tab 1', key: '1' },
+        { title: '2', content: 'Content of Tab 2', key: '2' },
+        { title: '3', content: 'Content of Tab 3', key: '3' }];
+
+      const url = 'jsonplaceholder.typicode.com/posts/';
+
+      refs.active.setState({
+        mockData: mockData,
+        targetKeys: targetKeys
+      });
+
+      refs.basic.setState({
+        defaultTime: defaultTime
+      });
+
+      refs.available.setState({
+        panes: panes
+      });
+
+      refs.architecture.setState({
+        action: url
+      });
+
+      refs.warning.setState({
+        hide: false
+      });
     },
     onConfirm: function(refs, cb) {
       cb(false, 'errorMessage');

@@ -1,132 +1,75 @@
-const React = require('react');
+import React from 'react';
+import { Select } from 'antd';
 
-const copyObj = function(obj) {
-  let newobj = obj.constructor === Array ? [] : {};
-  if (typeof obj !== 'object') {
-    return newobj;
-  } else {
-    newobj = JSON.parse(JSON.stringify(obj));
-  }
-  return newobj;
-};
+const { Option, OptGroup } = Select;
 
-class Select extends React.Component {
+class SelectModal extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      value: props.value ? props.value : '',
-      disabled: !!props.disabled,
-      hide: !!props.hide,
-      data: props.data ? copyObj(props.data) : [],
-      checkedField: props.checkedField ? props.checkedField : false,
-      clicked: false
+      disabled: props.disabled || false,
+      value: props.value,
+      data: props.data
     };
 
     this.onChange = this.onChange.bind(this);
-    this.renderData = this.renderData.bind(this);
-    this.onLinkClick = this.onLinkClick.bind(this);
-  }
-
-  onLinkClick() {
-    this.setState({
-      clicked: true
-    });
-    this.props.onAction(this.props.field, this.state);
-  }
-
-  onChange(e) {
-    if (e.target.value === 'on') {
-      this.setState({
-        checkedField: this.props.field
-      });
-    } else {
-      this.setState({
-        checkedField: this.props.field,
-        value: e.target.value
-      });
-    }
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    for (let index in this.state) {
-      if (typeof this.state[index] !== 'object') {
-        if (this.state[index] !== nextState[index]) {
-          return true;
-        }
-      } else {
-        if (JSON.stringify(this.state[index]) !== JSON.stringify(nextState[index])) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 
   componentDidUpdate() {
     this.props.onAction(this.props.field, this.state);
   }
 
-  renderData() {
-    let props = this.props,
-      state = this.state,
-      __ = props.__;
-    if (state.data && state.data.length > 0) {
-      return (
-        <select value={state.value} disabled={state.disabled || (state.checkedField && state.checkedField !== props.field)} onChange={this.onChange}>
-          {
-            state.data.map(function(v) {
-              return <option key={v.id} disabled={v.disabled} value={v.id}>{v.name || '(' + v.id.substr(0, 8) + ')'}</option>;
-            })
-          }
-        </select>
-      );
-    } else if (props.empty_text) {
-      if (props.empty_text.link_info) {
-        return (
-          <span className={'empty-text-label'}>
-            {__[props.empty_text.info]}
-            <a onClick={this.onLinkClick}>
-              {
-                props.empty_text.link_info.map(function(m) {
-                  return __[m];
-                }).join('')
-              }
-            </a>
-          </span>
-        );
-      } else {
-        return (
-          <span className="empty-text-label">{__[props.empty_text.info]}</span>
-        );
+  onChange(value) {
+    this.setState({
+      value: value
+    });
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    for (let index in this.state) {
+      if (this.state[index] !== nextState[index]) {
+        return true;
       }
+    }
+    return false;
+  }
+
+  initialize(props, state) {
+    switch(props.type) {
+      case 'select':
+        return state.data.map((d, index) => <Option key={d.id} value={d.id}>{d.name || '(' + d.id.substring(0, 8) + ')'}</Option>);
+      case 'optionGroup':
+        return state.data.map((opt, index) =>
+          <OptGroup key={opt.id} label={opt.name}>
+            {
+              opt.children && opt.children.map(child => <Option key={child.id} value={child.id}>{child.name || '(' + child.id.substring(0, 8) + ')'}</Option>)
+            }
+          </OptGroup>
+        );
+      default:
+        break;
     }
   }
 
   render() {
-    let props = this.props,
-      state = this.state;
-    let className = 'modal-row select-row';
-    if (props.is_long_label) {
-      className += ' label-row long-label-row';
-    } else {
-      className += ' label-row';
-    }
-    if (state.hide) {
-      className += ' hide';
-    }
+    let state = this.state,
+      props = this.props,
+      styleWidth = { width: props.width };
 
-    return (
+    let className = 'modal-row select-row label-row';
+
+    return(
       <div className={className}>
+        <div>{props.label}</div>
         <div>
-          {props.label}
-        </div>
-        <div>
-          {props.checkedField && <input type="radio" checked={state.checkedField === props.field} onChange={this.onChange} />}
-          {this.renderData()}
+          <Select value={state.value} style={styleWidth} disabled={state.disabled} onChange={this.onChange}>
+            { state.data && this.initialize(props, state) }
+          </Select>
         </div>
       </div>
     );
   }
 }
 
-module.exports = Select;
+export default SelectModal;

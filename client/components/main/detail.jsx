@@ -1,129 +1,26 @@
-require('./style/index.less');
-
-const React = require('react');
-const {Tab} = require('client/uskin/index');
-const router = require('client/utils/router');
-const event = require('./event');
+import './style/index.less';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import history from 'client/utils/history';
 
 class Detail extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      visible: false,
-      loading: false,
-      tabs: this.props.tabs,
-      contents: {}
-    };
-  }
-
-  componentWillMount() {}
-
-  componentDidMount() {}
-
-  componentWillReceiveProps(nextProps, nextState) {}
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.visible) {
-      if (!nextState.loading && (Object.keys(nextState.contents).length === 0)) {
-        return false;
-      }
-    } else {
-      if (!this.state.visible) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-
-  componentDidUpdate() {}
-
-  updateTabContent(tab) {
-    let func = this.props.onClickTabs;
-    func && func(tab);
-  }
-
-  onClickTabs(e, tab) {
-    if (tab.key !== this.findDefaultTab().key) {
-      let tabs = this.changeDefaultTab(tab);
-      this.setState({
-        tabs: tabs
-      });
-
-      let contents = this.state.contents;
-      if (!contents[tab.key]) {
-        this.updateTabContent(tab);
-      }
-    }
-  }
-
-  findDefaultTab() {
-    return this.state.tabs.filter((t) => t.default)[0];
-  }
-
-  changeDefaultTab(tab) {
-    event.emit('changeTab', tab);
-
-    let tabs = this.state.tabs;
-    tabs.forEach((t) => {
-      t.default = (t.key === tab.key) ? true : false;
-    });
-
-    return tabs;
-  }
-
-  refresh() {
-    if (this.state.visible) {
-      this.setState({
-        contents: {}
-      }, () => {
-        this.updateTabContent();
-      });
-    }
-  }
-
-  loading() {
-    this.setState({
-      loading: true
-    });
   }
 
   onClose() {
-    let path = router.getPathList();
-    router.pushState('/' + path.slice(0, 2).join('/'));
+    // let path = router.getPathList();
+    // router.pushState('/' + path.slice(0, 2).join('/'));
   }
 
   render() {
-    let state = this.state;
-
     return (
-      <div className={'halo-com-table-detail' + (state.visible ? ' visible' : '')}>
-        <div className="detail-head">
-          <div className="close" onClick={this.onClose.bind(this)}>
-            <i className="glyphicon icon-close" />
-          </div>
-          <Tab ref="tab" items={state.tabs} type="sm" onClick={this.onClickTabs.bind(this)} />
-        </div>
-        {state.loading ?
-          <div className="detail-loading">
-            <i className="glyphicon icon-loading" />
-          </div>
-          : null
-        }
-        {Object.keys(state.contents).map((key) =>
-          state.contents[key] ?
-          <div key={key}
-            className="detail-content"
-            data-filed={key}
-            style={{display: key === this.findDefaultTab().key ? 'block' : 'none'}}>
-            {state.contents[key]}
-          </div>
-          : null
-        )}
+      <div className="detail-box">
+        <Link to={`/${history.getPathList()[0]}`}>关闭</Link>
+        <h1>Detail</h1>
       </div>
     );
   }
 }
 
-module.exports = Detail;
+export default Detail;

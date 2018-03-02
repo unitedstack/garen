@@ -1,53 +1,52 @@
 import './style/index.less';
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 const SubMenu = Menu.SubMenu;
-import { Link } from 'react-router-dom';
 
 class SideMenu extends React.Component {
   constructor(props) {
     super(props);
-    
-    this.state = {
-    };
+  }
+
+  state = {
+    items: this.props.items
+  };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return prevState.items !== nextProps.items ? nextProps : null;
   }
 
   render() {
-    const props = this.props;
-    const location = props.location;
-
-    return (
+    const items = this.state.items;
+    return items ?
       <div>
-        {
-          props.configs ?
-          <div>
-            <Menu
-              defaultSelectedKeys={[location.pathname.split('/')[1] || 'home']}
-              defaultOpenKeys={['sub1']}
-              mode="inline"
-              theme="dark"
-              style={{width: 180}}
-            >
-              {
-                props.configs.modules.map(module => {
-                  return !module.title ? module.items.map(item => <Menu.Item key={item}>
-                    <Link to={`/${item}`}><Icon type="pie-chart" />{item}</Link>
-                  </Menu.Item>) :
-                    <SubMenu key={module.title} title={<span><Icon type="mail" /><span>{module.title}</span></span>}>
-                      {
-                        module.items.map(item => <Menu.Item key={item}>
-                          <Link to={`/${item}`}><Icon type="pie-chart" />{item}</Link>
-                        </Menu.Item>)
-                      }
-                    </SubMenu>;
-                })
-              }
-            </Menu>
-          </div> : null
-        }
-      </div>
-    );
+        <Menu
+          selectedKeys={items.defaultSelectedKeys}
+          defaultOpenKeys={items.defaultOpenKeys}
+          mode="inline"
+          theme="dark"
+          // 禁用Menu的点选功能，完全通过history.listen来操控selectedKeys
+          selectable={false}
+          style={{width: 180}}
+        >
+          {
+            items.modules.map(module => {
+              return !module.title ? module.items.map(item => <Menu.Item key={item}>
+                <Link to={`/${item}`}><Icon type="pie-chart" />{item}</Link>
+              </Menu.Item>) :
+                <SubMenu key={module.title} title={<span><Icon type="mail" /><span>{module.title}</span></span>}>
+                  {
+                    module.items.map(item => <Menu.Item key={item}>
+                      <Link to={`/${item}`}><Icon type="pie-chart" />{item}</Link>
+                    </Menu.Item>)
+                  }
+                </SubMenu>;
+            })
+          }
+        </Menu>
+      </div> : null;
   }
 }
 

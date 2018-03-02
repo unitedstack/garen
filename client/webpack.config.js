@@ -19,7 +19,7 @@ fs.readdirSync('./applications')
 
 module.exports = (env) => {
   // production mode
-  let themer = lessToJs(fs.readFileSync(path.join(__dirname, `./theme/index.less`), 'utf8'));
+  let themer = lessToJs(fs.readFileSync(path.join(__dirname, './theme/index.less'), 'utf8'));
   let webpackConfig = {
 
     context: __dirname,

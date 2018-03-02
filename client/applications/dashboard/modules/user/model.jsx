@@ -19,7 +19,7 @@ class Model extends React.Component {
   render() {
     return (
       <div className="garen-module-user">
-        <h1>User</h1>
+        <h1><a href="/home" data-type="router" >Current: User, Go to: Home</a></h1>
       </div>
     );
   }

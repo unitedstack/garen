@@ -2,11 +2,19 @@ import './style/index.less';
 
 import React from 'react';
 
+import Main from 'client/components/main/index';
+
+import config from './config.json';
+
 class Model extends React.Component {
 
   constructor(props) {
     super(props);
   }
+
+  state = {
+    config: config
+  };
 
   componentWillMount() {
 
@@ -16,10 +24,15 @@ class Model extends React.Component {
 
   }
 
+  
+
   render() {
+    const state = this.state;
     return (
       <div className="garen-module-home">
-        <h1>Home</h1>
+        <Main
+          config={state.config}
+        />
       </div>
     );
   }

@@ -1,0 +1,85 @@
+{
+  "tabs": [{
+    "name": "Tab1",
+    "key": "tab1",
+    "default": true
+  }, {
+    "name": "Tab2",
+    "key": "tab2"
+  }],
+  "btns": [{
+    "value": ["create", "router"],
+    "key": "create",
+    "type": "create",
+    "icon": "create"
+  }, {
+    "value": ["more"],
+    "key": "more",
+    "iconClass": "more",
+    "dropdown": {
+      "items": [{
+        "items": [{
+          "title": ["gateway_limit"],
+          "key": "gw_limit",
+          "disabled": true
+        }, {
+          "title": ["enable", "ext_gatway"],
+          "key": "en_gw",
+          "disabled": true
+        }]
+      }]
+    }
+  }, {
+    "key": "refresh",
+    "icon": "refresh"
+  }],
+  "search": {
+    "column": {
+      "name": true
+    }
+  },
+  "table": {
+    "checkbox": true,
+    "dataKey": "id",
+    "loading": true,
+    "columns": [{
+      "title": "Name",
+      "dataIndex": "name",
+      "type": "captain"
+    }, {
+      "title": "Age",
+      "dataIndex": "age"
+    }, {
+      "title": "Address",
+      "dataIndex": "address"
+    }],
+    "data": [{
+      "id": "1",
+      "name": "John Brown",
+      "age": 32,
+      "address": "New York No. 1 Lake Park"
+    }, {
+      "id": "2",
+      "name": "Jim Green",
+      "age": 42,
+      "address": "London No. 1 Lake Park"
+    }, {
+      "id": "3",
+      "name": "Joe Black",
+      "age": 32,
+      "address": "Sidney No. 1 Lake Park"
+    }, {
+      "id": "4",
+      "name": "Disabled User",
+      "age": 99,
+      "address": "Sidney No. 1 Lake Park"
+    }],
+    "detail": {
+      "tabs": [{
+        "name": ["description"],
+        "key": "description",
+        "default": true
+      }]
+    }
+  }
+}

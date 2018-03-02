@@ -11,15 +11,10 @@
     ]
   }],
   "default_module": "home",
+  "default_openKeys": ["other"],
   "routers": [{
     "key": "subnet",
     "link": "network"
   }],
-  "default_hide_modules": [
-    "ike-policy",
-    "ipsec-policy",
-    "instance-public",
-    "volume-public",
-    "object-storage"
-  ]
+  "default_hide_modules": []
 }

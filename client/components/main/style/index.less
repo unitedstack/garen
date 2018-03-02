@@ -1,206 +1,56 @@
-@import "../../../style/index.less";
-
-@detail-head-bg-color: @color_grey;
-@detail-border-color: @color_grey_600;
-@close-icon-hover-color: @color_info;
-@loading-color: @color_font_800;
-@table-active-color: @color_info_600;
-@table-down-color: @color_font_800;
-@toggle-bg-color: @color_grey;
-
 .halo-com-main {
-  position: relative;
   display: flex;
-  flex-direction: column;
   flex: 1;
-  padding: 0 20px;
-  overflow: hidden;
-
-  > .header {
-    flex: 1;
-    .fixed-height(31px);
-    padding-bottom: 12px;
-    border-bottom: 1px solid @detail-head-bg-color;
-    box-sizing: border-box;
-
-    h3 {
-      font-size: 16px;
-      font-weight: normal;
-      color: #42b9e5;
-    }
-  }
-
-  > .operation-list {
-    flex: 1;
-    .fixed-height(62px);
-    padding: 15px 0 15px;
-    box-sizing: border-box;
-
-    > .btn-list {
-      display: inline-block;
-      > .btn {
-        margin-right: 8px;
-      }
-    }
-    .input-search {
-      float: right;
-    }
-  }
-
-  > .table-box {
-    flex: 1;
+  position: relative;
+  .margin-wrapper {
+    flex-direction: column;
     display: flex;
-    overflow: hidden;
-    position:relative;
-    .table-with-no-data {
-      flex: 1;
-      p {
-        margin-top: 70px;
-        text-align: center;
-      }
-    }
-    .table {
-      flex: 1;
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    .submenu-tabs {
+      width: 100%;
+      height: 45px;
+      min-height: 45px;
+      max-height: 45px;
       overflow: hidden;
-      margin-bottom: 20px;
-      i.glyphicon {
-        margin-right: 4px;
-      }
-      a.captain {
-        cursor: pointer;
-      }
-      .label-active {
-        color: @table-active-color;
-      }
-      .label-down {
-        color: @table-down-color;
-      }
     }
-    .table-mini {
-      margin-bottom: 0;
+    .operation-list {
+      margin-top: 16px;
+      width: 100%;
+      height: 60px;
+      background-color: #ccc;
+    }
+    .table-box {
+      flex: 1;
+      margin-top: 16px;
     }
   }
-
-  > .page {
-
-  }
-
-}
-
-.halo-com-table-detail {
-  position: absolute;
-  top: 36px;
-  left: 200px;
-  right: 0;
-  bottom: 0;
-  background-color: #fff;
-  border-left: 1px solid @detail-border-color;
-  transform: translate(100%, 0);
-  transition: transform 0.5s;
-  &.visible {
-    transform: translate(0, 0);
-  }
-
-  .detail-head {
+  .detail-box {
+    z-index: 10;
     position: absolute;
-    top: -36px;
-    left: -1px;
-    right: 0;
-    border-left: 1px solid @detail-border-color;
-    .close {
-      font-size: 14px;
-      cursor: pointer;
-      float: left;
-      padding: 5px;
-      margin: 7px 0 0 15px;
-      &:hover {
-        color: @close-icon-hover-color;
-      }
-    }
-  }
-
-  .detail-loading {
+    background-color: #fff;
     width: 100%;
     height: 100%;
-    overflow-y: hidden;
-    position: relative;
-    .icon-loading {
-      position: absolute;
-      top: 60px;
-      left: 50%;
-      margin-left: -18px;
-      width: 36px;
-      color: @loading-color;
-      .loading-ani();
-      font-size: 36px!important;
-    }
+    left: 0;
+    top: 0;
   }
-  .detail-content {
-    height: 100%;
-    overflow-y: auto;
-    position: relative;
-    > div {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-    }
-    .no-data-desc {
-      position: relative;
-      height: 100%;
-      p {
-        position: absolute;
-        top: 50%;
-        width: 100%;
-        margin-top: -7px;
-        text-align: center;
-        height: 14px;
-        line-height: 14px;
-      }
-    }
+  .slide-enter {
+    left: 120%;
   }
-
-  .toggle {
-    margin: 0 0 24px 20px;
-    &:nth-child(1) {
-      margin: 24px 0 24px 20px;
-    }
-    .toggle-title {
-      height: 42px;
-      line-height: 42px;
-      font-size: 14px;
-      background-color: @toggle-bg-color;
-      border-radius: 2px;
-      padding: 0 16px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      user-select: none;
-      cursor: pointer;
-      i {
-        float: right;
-        height: 42px;
-        line-height: 42px;
-      }
-    }
-    .toggle-content {
-      height: 100%;
-      &.fold {
-        height: 0;
-        transition: height .5s;
-        overflow: hidden;
-      }
-      &.unfold {
-        padding-top: 20px;
-        height: auto;
-        transition: height .5s;
-      }
-    }
+  
+  .slide-enter.slide-enter-active {
+    left: 0;
+    transition: left 0.3s;
   }
-}
-
-.halo-module {
-  flex: 1;
-  display: flex;
+  
+  .slide-exit {
+    left: 0;
+  }
+  
+  .slide-exit.slide-exit-active {
+    left: 120%;
+    transition: all 0.3s;
+  }
+  
 }

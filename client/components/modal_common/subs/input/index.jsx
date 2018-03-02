@@ -1,25 +1,24 @@
-const React = require('react');
-const ShortTip = require('../short_tip/index');
+import React from 'react';
+import { Input, Select, AutoComplete, Tooltip } from 'antd';
 
-class Input extends React.Component {
+const { TextArea, Search } = Input;
+const Option = Select.Option;
+
+const InputGroup = Input.Group; 
+
+class InputModal extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      value: props.value ? props.value : '',
-      disabled: !!props.disabled,
-      hide: !!props.hide,
-      error: false,
-      tip_info: props.tip_info || ''
+      hide: props.hide,
+      value: '',
+      groupInput: props.defaultValue || (props.data && props.data[0])
     };
-
-    this.onChange = this.onChange.bind(this);
   }
 
-  onChange(e) {
-    this.setState({
-      value: e.target.value
-    });
+  componentDidUpdate() {
+    this.props.onAction(this.props.field, this.state);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -31,40 +30,107 @@ class Input extends React.Component {
     return false;
   }
 
-  componentDidUpdate() {
-    this.props.onAction(this.props.field, this.state);
+  onChange(type) {
+    let inputValue = null;
+    switch(type) {
+      case 'input':
+        inputValue = this[type].input.value;
+        break;
+      case 'textarea':
+        inputValue = this[type].textAreaRef.value;
+        break;
+      case 'searchInput':
+        inputValue = this[type].input.input.value;
+    }
+
+    this.setState({
+      value: inputValue
+    });
+  }
+
+  //input: this.inputRef.input.value
+  //textArea: this.inputRef.textAreaRef.value
+  //search: this.inputRef.input.input.value
+  //search.enterButton: 可选值(true, false(默认), 任意字符串(比如Search))
+  //size: 指高度
+
+  initialize(props) {
+    let styleWidth = { width: props.width };
+
+    switch(props.type) {
+      case 'input':
+        return <Tooltip
+          trigger={['focus']}
+          title={props.__[props.tipTitle]}
+          placement="topLeft"
+          overlayClassName="numeric-input">
+          <Input style={styleWidth}
+            ref={ input => this[props.type] = input}
+            placeholder={props.__[props.placeholder]}
+            onChange={this.onChange.bind(this, props.type)}/>;
+        </Tooltip>;
+      case 'textarea':
+        return <TextArea style={styleWidth}
+          rows={props.rows || 4}
+          ref={ input => this[props.type] = input}
+          onChange={this.onChange.bind(this, props.type)}/>;
+      case 'searchInput':
+        return <Search
+          style={styleWidth}
+          ref={ input => this[props.type] = input}
+          placeholder={props.__[props.placeholder]}
+          enterButton={props.enterButton || false}
+          onSearch={this.onChange.bind(this, props.type)} />;
+      case 'groupInput':
+        return <InputGroup>
+          <Select
+            defaultValue={props.__[props.defaultValue] || props.__[props.data[0]]}
+            onChange={this.selectChange.bind(this)}>
+            {
+              props.data && props.data.map((dt, index) => <Option key={index} value={dt}>{props.__[dt]}</Option>)
+            }
+          </Select>
+          <AutoComplete
+            style={styleWidth}
+            onChange={this.handleChange.bind(this)}
+            placeholder={props.__[props.placeholder]}
+          />
+        </InputGroup>;
+      default:
+        break;
+    }
+  }
+
+  selectChange(value) {
+    this.setState({
+      groupInput: value
+    });
+  }
+
+  handleChange(value) {
+    this.setState({
+      value: value
+    });
   }
 
   render() {
     let props = this.props,
-      state = this.state;
-    let className = 'modal-row input-row';
-    if (props.is_long_label) {
-      className += ' label-row long-label-row';
+      state = this.state,
+      className = 'modal-row label-row';
+
+    if (props.type === 'textarea') {
+      className += ' textarea-row';
     } else {
-      className += ' label-row';
-    }
-    if (this.state.hide) {
-      className += ' hide';
+      className += ' input-row';
     }
 
-    return (
-      <div className={className}>
-        <div>
-          {
-            props.required && <strong>*</strong>
-          }
-          {props.label}
-        </div>
-        <div>
-          <input className={this.state.error ? 'error' : ''} type={props.input_type} disabled={this.state.disabled} onChange={this.onChange} value={this.state.value} />
-          {
-            state.tip_info && <ShortTip label={props.__[state.tip_info] || state.tip_info} />
-          }
-        </div>
-      </div>
-    );
+    className += state.hide ? ' hide' : '';
+
+    return <div className={ className }>
+      <div>{props.label}</div>
+      <div>{this.initialize(props)}</div>
+    </div>;
   }
 }
 
-module.exports = Input;
+export default InputModal;

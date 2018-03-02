@@ -1,1 +1,35 @@
+.modal-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.55);
+  height: 100%;
+  z-index: 998;
 
+  &.modal-mask-enter {
+    opacity: 0;
+    animation-duration: 0.2s;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(.08, .82, .17, 1);
+    animation-play-state: paused;
+
+    &.modal-mask-enter-active {
+      animation-name: modalFadeIn;
+      animation-play-state: running;
+    }
+  }
+
+  &.modal-mask-leave {
+    animation-duration: 0.2s;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(.78, .14, .15, .86);
+    animation-play-state: paused;
+
+    &.modal-mask-leave-active {
+      animation-name: modalFadeOut;
+      animation-play-state: running;
+    }
+  }
+}

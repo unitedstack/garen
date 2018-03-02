@@ -1,0 +1,71 @@
+{
+  "title": ["create", "keypair"],
+  "fields": [{
+    "type": "steps",
+    "field": "steps",
+    "title": ["0", "1", "2"],
+    "description": ["progressDot"],
+    "size": "small",
+    "icons": ["user"],
+    "progressDot": false
+  }, {
+    "type": "cascader",
+    "field": "instance",
+    "data": [],
+    "placeholder": "instance",
+    "hide": false
+  }, {
+    "type": "datePicker",
+    "field": "volume",
+    "pickerType": "datePicker",
+    "allowClear": true,
+    "disabled": false,
+    "showTime": true
+  }, {
+    "type": "input",
+    "field": "port",
+    "placeholder": "instance",
+    "tipTitle": "instance"
+  }, {
+    "type": "textarea",
+    "field": "network",
+    "rows": 6,
+    "hide": true
+  }, {
+    "type": "searchInput",
+    "field": "searchInput",
+    "enterButton": "Search",
+    "placeholder": "instance"
+  }, {
+    "type": "groupInput",
+    "field": "groupInput",
+    "data": ["create", "more"],
+    "defaultValue": "more",
+    "placeholder": "instance",
+    "width": 280
+  }, {
+    "type": "inputNumber",
+    "field": "subnet",
+    "max": 10,
+    "min": 1,
+    "disabled": false,
+    "step": 1,
+    "defaultValue": 2
+  }, {
+    "type": "radio",
+    "field": "router",
+    "disabled": true,
+    "data": []
+  }, {
+    "type": "select",
+    "field": "image"
+  }, {
+    "type": "optionGroup",
+    "field": "alarm"
+  }],
+  "btn": {
+    "value": "create",
+    "type": "create",
+    "disabled": false
+  }
+}

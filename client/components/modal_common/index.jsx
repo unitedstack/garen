@@ -9,17 +9,12 @@ function modal(props) {
   let container = null;
 
   (function() {
-    let mask = null,
-      doc = document,
+    let doc = document,
       root = doc.getElementById('modal-container');
 
     if (!root) {
       root = doc.createElement('div');
       root.id = 'modal-container';
-
-      mask = doc.createElement('div');
-      mask.classList.add('modal-mask');
-      root.appendChild(mask);
 
       doc.body.appendChild(root);
     }

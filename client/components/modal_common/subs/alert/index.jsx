@@ -1,12 +1,13 @@
 import React from 'react';
 import { Alert } from 'antd';
 
-class Error extends React.Component {
+class Tip extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      hide: !!props.hide
+      hide: !!props.hide,
+      message: props.message || ''
     };
 
     this.isProps = true;
@@ -46,4 +47,4 @@ class Error extends React.Component {
   }
 }
 
-export default Error;
+export default Tip;

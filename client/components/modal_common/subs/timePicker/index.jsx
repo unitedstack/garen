@@ -1,7 +1,7 @@
-const React = require('react');
+import React from 'react';
 import { TimePicker} from 'antd';
 
-class Timepicker extends React.Component {
+class Time extends React.Component {
   constructor(props) {
     super(props);
 
@@ -67,4 +67,4 @@ class Timepicker extends React.Component {
   }
 }
 
-export default Timepicker;
+export default Time;

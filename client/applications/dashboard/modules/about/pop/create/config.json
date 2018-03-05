@@ -55,49 +55,49 @@
     "type": "optionGroup",
     "field": "alarm"
   }, {
-    "type": "Slider",
-    "field": "apply",
+    "type": "slider",
+    "field": "compute",
     "min": 10,
     "max": 50,
     "value": 15,
     "unit": "c",
     "dots": true
   }, {
-    "type": "Upload",
-    "field": "architecture",
+    "type": "upload",
+    "field": "balancer",
     "multiple": true,
     "headers": {
       "authorization": "authorization-text"
     }
   }, {
-    "type": "Switch",
-    "field": "attribute",
+    "type": "switch",
+    "field": "data",
     "defaultChecked": false,
     "size": "small",
     "checkedChildren": "1",
     "unCheckedChildren": "0"
   }, {
-    "type": "Tabs",
-    "field": "available"
+    "type": "tabs",
+    "field": "here"
   }, {
-    "type": "TimePicker",
-    "field": "basic",
+    "type": "timePicker",
+    "field": "join",
     "allowEmpty": true,
     "disabled": false
   }, {
-    "type": "Transfer",
+    "type": "transfer",
     "field": "active",
     "titles": ["instance","network"],
     "showSearch": true
   }, {
-    "type": "Tooltip",
+    "type": "tooltip",
     "field": "add",
     "arrowPointAtCenter": false,
     "placement": "bottomRight",
     "title": "instance",
     "text": "network"
   }, {
-    "type": "Alert",
+    "type": "alert",
     "tip_type": "success",
     "field": "warning",
     "message": "network"

@@ -137,15 +137,15 @@ function pop(parent, callback) {
         targetKeys: targetKeys
       });
 
-      refs.basic.setState({
+      refs.join.setState({
         defaultTime: defaultTime
       });
 
-      refs.available.setState({
+      refs.here.setState({
         panes: panes
       });
 
-      refs.architecture.setState({
+      refs.balancer.setState({
         action: url
       });
 
@@ -181,6 +181,13 @@ function pop(parent, callback) {
           break;
         case 'volume':
           //console.log('datePicker: ', refs.volume.state)
+          break;
+        case 'data':
+          break;
+        case 'join':
+          
+          break;
+        case 'active':
           break;
         default:
           break;

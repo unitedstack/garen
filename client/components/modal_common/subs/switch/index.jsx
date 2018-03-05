@@ -1,4 +1,4 @@
-const React = require('react');
+import React from 'react';
 import { Switch} from 'antd';
 
 class Switchs extends React.Component {
@@ -39,7 +39,7 @@ class Switchs extends React.Component {
   render() {
     let props = this.props,
       state = this.state;
-    let className = 'modal-row input-row';
+    let className = 'modal-row switch-row';
     if (props.is_long_label) {
       className += ' label-row long-label-row';
     } else {

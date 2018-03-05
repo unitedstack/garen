@@ -1,4 +1,4 @@
-const React = require('react');
+import React from 'react';
 import { Slider, InputNumber} from 'antd';
 
 class Slide extends React.Component {
@@ -70,11 +70,11 @@ class Slide extends React.Component {
           {props.label}
         </div>
         <div className="slidearea">
-          <Slider min={min} max={max} step={props.step} disabled={disabled} value={state.inputValue} onChange={this.onSliderChange} style={{width: '350px'}} />
+          <Slider min={min} max={max} step={props.step} disabled={disabled} value={state.inputValue} onChange={this.onSliderChange} style={{width: '320px'}} />
           <InputNumber
             min={min}
             max={max}
-            style={{ marginLeft: 16 }}
+            style={{ marginLeft: 12 }}
             value={this.state.inputValue}
             onChange={this.onChange}
           />

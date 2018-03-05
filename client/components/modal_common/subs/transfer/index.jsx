@@ -1,4 +1,4 @@
-const React = require('react');
+import React from 'react';
 import { Transfer} from 'antd';
 
 class Shuttle extends React.Component {

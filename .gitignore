@@ -61,9 +61,8 @@ typings/
 .DS_Store
 
 # Dist
-client/dist
-client/assets/**/
 client/public/dist
+client/public/assets/**/
 # i18n
 locale/*
 
@@ -72,3 +71,5 @@ package-lock.json
 client/manifest.json
 
 run
+
+config/config.local.js

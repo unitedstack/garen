@@ -12,7 +12,6 @@
     "eslint": "eslint *.js app/**/ configs/ scripts/ client/**/ tests/__tests__/ --ext .js,.jsx --cache && cd client && grunt jsonlint",
     "merge_assets": "cd client && grunt merge_assets",
     "prepare": "cd scripts && node checkPreCommit.js",
-    "start:dev": "node ./scripts/client_i18n_build.js && cd client && grunt devServer && webpack-dev-server --color --inline",
     "dev:server": "egg-bin dev",
     "start:local": "EGG_SERVER_ENV=local egg-bin dev",
     "start:test": "EGG_SERVER_ENV=unittest egg-bin dev",

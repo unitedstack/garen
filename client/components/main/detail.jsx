@@ -8,16 +8,15 @@ class Detail extends React.Component {
     super(props);
   }
 
-  onClose() {
-    // let path = router.getPathList();
-    // router.pushState('/' + path.slice(0, 2).join('/'));
-  }
-
   render() {
+    const props = this.props;
     return (
       <div className="detail-box">
         <Link to={`/${history.getPathList()[0]}`}>关闭</Link>
         <h1>Detail</h1>
+        {
+          Object.keys(props.row).map((r, i) => <div key={i}>{`${r}: ${props.row[r]}`}</div>)
+        }
       </div>
     );
   }

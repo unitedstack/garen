@@ -1,14 +1,14 @@
 /**
  * @PengJiyuan
  */
-const path = require("path");
-const webpack = require("webpack");
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = (env) => {
   let config = {
 
     resolve: {
-      extensions: [".js", ".jsx"]
+      extensions: ['.js', '.jsx']
     },
 
     entry: {
@@ -19,15 +19,15 @@ module.exports = (env) => {
     },
 
     output: {
-      path: path.join(__dirname, 'dist/dll'),
-      filename: "dll_[name]_[hash:8].js",
-      library: "[name]_[hash]"
+      path: path.join(__dirname, 'public/dist/dll'),
+      filename: 'dll_[name]_[hash:8].js',
+      library: '[name]_[hash]'
     },
 
     plugins: [
       new webpack.DllPlugin({
-        path: path.join(__dirname, "manifest.json"),
-        name: "[name]_[hash]"
+        path: path.join(__dirname, 'manifest.json'),
+        name: '[name]_[hash]'
       }),
       new webpack.optimize.UglifyJsPlugin({
         mangle: {
@@ -47,6 +47,7 @@ module.exports = (env) => {
   };
 
   if(env && env.development) {
+    config.output.filename = 'dll_[name].js';
     config.plugins.pop();
   }
 

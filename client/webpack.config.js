@@ -6,7 +6,23 @@ const fs = require('fs');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
-const lessToJs = require('less-vars-to-js');
+const os = require('os');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
+let language = process.env.npm_config_lang || process.env.language;
+
+// Default language
+if (!language) {
+  language = 'zh-CN';
+}
+
+const getManifest = () => {
+  try {
+    return require('./manifest.json');
+  } catch(e) {
+    return {};
+  }
+};
 
 let entry = {};
 fs.readdirSync('./applications')
@@ -19,7 +35,6 @@ fs.readdirSync('./applications')
 
 module.exports = (env) => {
   // production mode
-  let themer = lessToJs(fs.readFileSync(path.join(__dirname, './theme/index.less'), 'utf8'));
   let webpackConfig = {
 
     context: __dirname,
@@ -27,10 +42,10 @@ module.exports = (env) => {
     entry: entry,
 
     output: {
-      path: path.resolve(__dirname, './dist'),
-      filename: '[name].min.js',
-      publicPath: 'client/dist',
-      chunkFilename: '[id].bundle.js'
+      path: path.resolve(__dirname, './public/dist'),
+      filename: '[hash:6].' + language + '.[name].min.js',
+      publicPath: '/public/dist',
+      chunkFilename: '[hash:6].' + language + '.[id].bundle.js'
     },
 
     module: {
@@ -56,7 +71,7 @@ module.exports = (env) => {
               }
             }
           }, {
-            loader: `less-loader?{"sourceMap":true,"modifyVars":${JSON.stringify(themer)}}`
+            loader: 'less-loader'
           }]
         })
       }, {
@@ -97,9 +112,21 @@ module.exports = (env) => {
     },
 
     plugins: [
-      new ExtractTextPlugin({filename: '[name].min.css'}),
-      new webpack.LoaderOptionsPlugin({
-        debug: true
+      new ExtractTextPlugin({
+        filename: '[hash:6].[name].min.css',
+        allChunks: true
+      }),
+      new UglifyJSPlugin({
+        parallel: os.cpus().length
+      }),
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify('production')
+        }
+      }),
+      new webpack.DllReferencePlugin({
+        context: path.join(__dirname),
+        manifest: getManifest()
       })
     ],
 
@@ -120,13 +147,25 @@ module.exports = (env) => {
     devServer: {
       contentBase: path.join(__dirname),
       compress: true,
-      inline: true,
-      historyApiFallback: true, // 解决404
-      port: 8888
-    },
-
-    devtool: 'cheap-source-map'
+      port: 9000
+    }
   };
 
+  if(env && env.development) {
+    webpackConfig.watch = true;
+    webpackConfig.devtool = 'cheap-source-map';
+    webpackConfig.output.path = path.resolve(__dirname, 'public/dist');
+    webpackConfig.output.filename = '[name].min.js';
+    webpackConfig.plugins = [
+      new ExtractTextPlugin({filename: '[name].min.css'}),
+      new webpack.LoaderOptionsPlugin({
+        debug: true
+      }),
+      new webpack.DllReferencePlugin({
+        context: path.join(__dirname),
+        manifest: getManifest()
+      })
+    ];
+  }
   return webpackConfig;
 };

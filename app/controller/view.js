@@ -14,17 +14,18 @@ class ViewController extends Controller {
     
     //this.ctx.body = 'hi, tfcloud. view:' + view + ctx.__('Email');
     this.ctx.body = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>UDS</title>
-  <link href="/public/dist/dashboard.min.css" rel="stylesheet"/>
-</head>
-<body>
-  <div id="container"></div>
-  <script src="/public/dist/dashboard.min.js"></script>
-</body>
-</html>`;
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>UDS</title>
+        <link href="/public/dist/dashboard.min.css" rel="stylesheet"/>
+      </head>
+      <body>
+        <div id="container"></div>
+        <script src="/public/dist/dll/dll_ustack.js"></script>
+        <script src="/public/dist/dashboard.min.js"></script>
+      </body>
+      </html>`;
   }
 
   async register() {

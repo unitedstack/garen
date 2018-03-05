@@ -19,9 +19,9 @@ module.exports = function(grunt) {
 
     // Task configuration.
     clean: {
-      dist: ['client/dist/*'],
-      exceptDll: ['client/dist/*.*'],
-      assets: ['client/assets/*/']
+      dist: ['client/public/dist/*'],
+      exceptDll: ['client/public/dist/*.*'],
+      assets: ['client/public/assets/*/']
     },
 
     cssnano: {
@@ -30,8 +30,8 @@ module.exports = function(grunt) {
       },
       dist: {
         files: [{
-          src: 'client/dist/*.css',
-          dest: 'client/dist/'
+          src: 'client/public/dist/*.css',
+          dest: 'client/public/dist/'
         }]
       }
     },
@@ -44,7 +44,7 @@ module.exports = function(grunt) {
       buildDll: dllConfig(),
       devDll: dllConfig({development: true}),
       build: webpackConfig(),
-      dev: webpackConfig()
+      dev: webpackConfig({development: true})
     },
 
     usebanner: {
@@ -53,7 +53,7 @@ module.exports = function(grunt) {
         banner: '<%= banner %>'
       },
       files: {
-        src: ['client/dist/*']
+        src: ['client/public/dist/*']
       }
     },
 
@@ -62,7 +62,7 @@ module.exports = function(grunt) {
         expand: true,
         cwd: 'client/applications',
         src: '**/assets/**',
-        dest: 'client/assets/',
+        dest: 'client/public/assets/',
         rename: function(dest, matchedSrcPath) {
           return path.join(dest, matchedSrcPath.replace('/assets', ''));
         }

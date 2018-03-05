@@ -1,7 +1,7 @@
-require('./style/index.less');
+import './style/index.less';
 
-const React = require('react');
-const {Button, DropdownButton} = require('client/uskin/index');
+import React from 'react';
+import { Button, Dropdown, Menu, Icon } from 'antd';
 
 class Detail extends React.Component {
   constructor(props) {
@@ -11,14 +11,6 @@ class Detail extends React.Component {
       btns: {}
     };
   }
-
-  componentWillMount() {
-    this.formateBtns(this.props.btns);
-  }
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.formateBtns(nextProps.btns);
-  // }
 
   formateBtns(btns) {
     let formatedBtns = {};
@@ -74,25 +66,22 @@ class Detail extends React.Component {
 
     return (
       <div className="btn-list">
-        {btns.map((btn, index) =>
-          btn.dropdown ?
-            <DropdownButton
-              key={index}
-              disabled={btn.disabled}
-              buttonData={btn}
-              dropdownItems={btn.dropdown.items}
-              dropdownOnClick={this.onClickDropdownBtn.bind(this)} />
-            : <Button
-              key={btn.key}
-              value={btn.value}
-              btnKey={btn.key}
-              type={btn.type}
-              disabled={btn.disabled}
-              hide={btn.hide}
-              iconClass={btn.icon}
-              initial={true}
-              onClick={this.onClickBtnList.bind(this)} />
-        )}
+        {
+          btns.map(btn => {
+            if(btn.dropdown) {
+              const menu = (
+                <Menu>
+                  <Menu.item key={btn.key}>{btn.value}</Menu.item>
+                </Menu>
+              );
+              return <Dropdown overlay={menu}>
+                <Button>
+                  {btn.value[0]} <Icon type="down" />
+                </Button>
+              </Dropdown>;
+            }
+          })
+        }
       </div>
     );
   }

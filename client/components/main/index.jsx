@@ -7,6 +7,7 @@ import { Table, Tabs } from 'antd';
 const TabPane = Tabs.TabPane;
 import history from 'client/utils/history';
 import Detail from './detail';
+// import ButtonList from './button_list';
 
 class Modal extends React.Component {
   constructor(props) {
@@ -14,6 +15,12 @@ class Modal extends React.Component {
 
     this.tableColRender(this.props.config.table.columns);
   }
+
+  state = {
+    selectRow: history.getPathList().length > 1
+      ? this.props.config.table.data.find(d => d.id === history.getPathList()[1])
+      : {}
+  };
 
   // shouldComponentUpdate(nextProps) {
   //   if (nextProps.visible) {
@@ -49,12 +56,16 @@ class Modal extends React.Component {
     e.preventDefault();
     const pathList = history.getPathList();
     // 没有二级路由的时候添加二级路由
-    if(pathList.length < 2 || row.id !== pathList[1]) {
-      history.push(`/${pathList[0]}/${row.id}`);
-    } else {
-      // 有二级路由的时候关闭二级路由
-      history.push(`/${pathList[0]}`);
-    }
+    this.setState({
+      selectRow: row
+    }, () => {
+      if(pathList.length < 2 || row.id !== pathList[1]) {
+        history.push(`/${pathList[0]}/${row.id}`);
+      } else {
+        // 有二级路由的时候关闭二级路由
+        history.push(`/${pathList[0]}`);
+      }
+    });
   }
 
   onChangTabs(key) {
@@ -65,9 +76,11 @@ class Modal extends React.Component {
   }
 
   render() {
-    const props = this.props,
+    const state = this.state,
+      props = this.props,
       _config = props.config,
       tabs = _config.tabs,
+      // btns = _config.btns,
       table = _config.table,
       columns = table.columns,
       data = table.data,
@@ -94,7 +107,8 @@ class Modal extends React.Component {
             </div> : null
           }
           <div className="operation-list">
-            <h1>Button List</h1>
+            {/* <ButtonList btns={btns} /> */}
+            <h1>ButtonList</h1>
           </div>
           <div className="table-box">
             {
@@ -120,7 +134,9 @@ class Modal extends React.Component {
                     timeout={300}
                   >
                     <Switch location={location}>
-                      <Route exact path={`${match.path}/:id`} component={Detail}/>
+                      <Route exact path={`${match.path}/:id`} children={() => (
+                        <Detail row={state.selectRow} />
+                      )}/>
                       <Route render={() => <span></span>}/>
                     </Switch>
                   </CSSTransition>

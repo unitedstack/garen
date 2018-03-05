@@ -1,4 +1,4 @@
-const React = require('react');
+import React from 'react';
 import { Upload, Button, Icon} from 'antd';
 
 class Uploading extends React.Component {
@@ -60,4 +60,4 @@ class Uploading extends React.Component {
   }
 }
 
-module.exports = Uploading;
+export default Uploading;

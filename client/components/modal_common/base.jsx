@@ -12,9 +12,9 @@ import Radio from './subs/radio/index';
 import Select from './subs/select/index';
 import Slider from './subs/slider/index';
 import Switch from './subs/switch/index';
-import TimePicker from './subs/TimePicker/index';
-import Transfer from './subs/Transfer/index';
-import Tooltip from './subs/Tooltip/index';
+import TimePicker from './subs/timePicker/index';
+import Transfer from './subs/transfer/index';
+import Tooltip from './subs/tooltip/index';
 import Alert from './subs/alert/index';
 import Upload from './subs/upload/index';
 import Tabs from './subs/tabs/index';
@@ -69,14 +69,14 @@ class ModalBase extends React.Component {
         'radio': Radio,
         'select': Select,
         'optionGroup': Select,
-        'Slider': Slider,
-        'Switch': Switch,
-        'TimePicker': TimePicker,
-        'Transfer': Transfer,
-        'Tooltip': Tooltip,
-        'Alert': Alert,
-        'Upload': Upload,
-        'Tabs': Tabs
+        'slider': Slider,
+        'switch': Switch,
+        'timePicker': TimePicker,
+        'transfer': Transfer,
+        'tooltip': Tooltip,
+        'alert': Alert,
+        'upload': Upload,
+        'tabs': Tabs
       };
 
       let Sub = subComs[m.type];
@@ -168,6 +168,7 @@ class ModalBase extends React.Component {
     return (
       <LocaleProvider locale={zh_CN}>
         <Modal ref={ this.modalRef } title={title} visible={state.visible} width={600}
+          onCancel={this.onCancel}
           footer={[
             <Button key="confirm" type="primary" loading={state.loading} onClick={this.onConfirm}>{__.confirm}</Button>,
             <Button key="cancel" onClick={this.onCancel}>{__.cancel}</Button>

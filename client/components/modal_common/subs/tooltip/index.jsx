@@ -1,7 +1,7 @@
-const React = require('react');
+import React from 'react';
 import { Tooltip, Button} from 'antd';
 
-class ToolTip extends React.Component {
+class CardTip extends React.Component {
   constructor(props) {
     super(props);
 
@@ -53,4 +53,4 @@ class ToolTip extends React.Component {
   }
 }
 
-export default ToolTip;
+export default CardTip;

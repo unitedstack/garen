@@ -63,10 +63,12 @@ typings/
 # Dist
 client/dist
 client/assets/**/
-
+client/public/dist
 # i18n
 locale/*
 
 package-lock.json
 
 client/manifest.json
+
+run

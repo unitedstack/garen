@@ -1,0 +1,7 @@
+{
+  "name": "egg-memjs",
+  "version": "0.0.1",
+  "eggPlugin": {
+    "name": "memjs"
+  }
+}
